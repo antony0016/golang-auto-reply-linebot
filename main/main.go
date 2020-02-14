@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"net/http"
 
 	"../mylib/server"
 
@@ -22,16 +21,12 @@ var bot *linebot.Client
 
 func main() {
 	var err error
-	apis := []api{api{Rout: "/callback", Func: p}}
+	apis := []api{api{Rout: "/callback", Func: HandleAllEvents}}
 
 	bot, err = linebot.New(channelSecret, channelAccessToken)
 
 	log.Println("bot:", bot, "\nerr:", err)
 
 	server.StartServer(serverPort, apis)
-
-}
-
-func p(w http.ResponseWriter, req *http.Request) {
 
 }
